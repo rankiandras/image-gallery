@@ -1,0 +1,181 @@
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    box-sizing: border-box;
+    background: transparent;
+    font-family: inherit;
+  }
+  a{
+    text-decoration: none;
+  }
+  a img {
+    border: none;
+  }
+  
+  button,
+  a {
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  textarea {
+    resize: none;
+  }
+  
+  button,
+  textarea,
+  select {
+    appearance: none !important;
+    border-radius: 0;
+}
+
+/* -------------------End of CSS reset------------------------------*/
+
+
+
+#header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    /* width: 100%; */
+    height: 100vh;
+    font-family: 'Rozha One', serif;    
+    font-size: 65px;
+    background-color: black;
+    color: lightgray;
+}
+
+@media screen and (max-width: 1130px) {
+    #header {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    #header > div > div {
+        display: none;
+    }
+}
+h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+    row-gap: 50px;
+    margin-left: 40px;
+}
+
+
+#header > div {
+    display: flex;
+    flex-direction: row;
+    margin: 2px;
+}
+
+#header > div div:nth-child(1) {
+    background-image: url(./img/mahler1.jpg);
+    height: 100vh;
+    width: 150px;
+    margin: 1px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.5;
+}
+
+#header > div div:nth-child(2) {
+    background-image: url(./img/mahler2.jpg);
+    height: 100vh;
+    width: 100px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    opacity: 0.8;
+    margin: 1px;
+}
+#header > div div:nth-child(3) {
+    background-image: url(./img/mahler3.jpg);
+    height: 100vh;
+    width: 80px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    margin: 1px;
+}
+
+form {
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: baseline;
+    z-index: 5;
+    background-color: black;
+    border-top: solid 1px whitesmoke;
+    border-bottom: solid 1px whitesmoke;
+    font-size: 18px;
+}
+
+
+input {
+    width: 200px;
+    height: 70px;
+    font-size: 18px;
+    color: gray;
+    background-color: black;
+}
+
+#pictureUpload {
+    display: none;
+}
+
+label {
+    width: 150px;
+    color: gray;
+    cursor: pointer;
+}
+
+input[type='submit'] {
+    cursor: pointer;
+    width: 60px;
+}
+
+.swiper {
+    width: 100%;
+    height: 100vh;   
+}
+
+.swiper-slide h2 {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 5px;
+    color: lightgray;
+    background-color: black;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 20px;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.deleteBtn {
+    width: 70px;
+    height: 25px;
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: 20px;
+    bottom: 0;
+    right: 0px;
+    /* transform: translateX(-50%); */
+    background-color: black;
+    color: lightgray;
+    border-radius: 5px;
+}
+
+.swiper-slide img {
+    width: 100%;
+    height: 100vh;
+    
+
+}
