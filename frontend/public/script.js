@@ -1,7 +1,11 @@
+/* ----- taking a JSON as input and parsing it to produce a JavaScript object using json() method */
+
 const parseJSON = async (url) => {
     const response = await fetch(url);
     return response.json();
 }
+
+/* ----- function to make a <div> in which the slides appears; iterating through data.json and actual iteration passing in as argument to the callback */
 
 const swiperComponent = (data, comp) => {
     return `
@@ -13,6 +17,8 @@ const swiperComponent = (data, comp) => {
     `
 }
 
+/* ----- function to create the individual slides; params are passed in by destructuring */
+
 const swiperSlideComponent = ({filename, title, nameOfPhotographer}) => {
     return `
         <div class="swiper-slide">
@@ -23,7 +29,7 @@ const swiperSlideComponent = ({filename, title, nameOfPhotographer}) => {
     `;
   
 }
-
+/* ----- header with text and three empty <div>-s for background-pictures*/
 const headerElement = () => {
     return `
         <div id='header'>
@@ -41,6 +47,8 @@ const headerElement = () => {
     `
 }
 
+/* ----- form element for uploading pictures rendered between the header and the swiper-slides */
+
 const formElement = () => {
     return `
         <form id='form'>
@@ -56,15 +64,23 @@ const formElement = () => {
 const loadEvent = async () => {
     // console.log('hello');
 
+    /* ----- catching the <div id='root'> of index.html */
     const rootElement = document.getElementById('root');
+    
+    
+    /* ----- fetching the data */
     const result = await parseJSON('/image-list');
     // console.log(result);
 
+    /* ----- inserting the headerElement */
     rootElement.insertAdjacentHTML('beforeend', headerElement())
 
+    /* ----- catching the headerElement and inserting the formElement after it */
     const headerInTheDOM = document.getElementById('header');
     headerInTheDOM.insertAdjacentHTML('afterend', formElement())
 
+    
+    /* ------ catching the formElement, adding an eventListener and creating formData for file upload */
     const formToSubmit = document.getElementById('form');
     formToSubmit.addEventListener('submit', e => {
         e.preventDefault();
@@ -79,6 +95,7 @@ const loadEvent = async () => {
         formData.append('picture', e.target.querySelector(`input[name='picture']`).files[0])
         console.log(e.target.querySelector(`input[name='picture']`).files[0]);
 
+        /* ----- creating a variable containing the settings of POST request and make the fetch */
         const fetchSettings = {
             method: 'POST',
             body: formData
@@ -91,6 +108,7 @@ const loadEvent = async () => {
                     console.dir(data);
                 }
             })
+            /* ---- document.location doesn't work yet */
             .then (() => document.location.reload(true))
             .catch(error => {
                 /* e.target.outerHTML = 'Error' */
@@ -101,17 +119,25 @@ const loadEvent = async () => {
 
     })
     
+    /* inserting the swiper-slide element */
     rootElement.insertAdjacentHTML('beforeend', swiperComponent(result, swiperSlideComponent));
-
+    /* set the loop feature of swiper-slide */
     const swiper = new Swiper('.swiper', {
         loop: true,
     })
 
+    /* catching the delete buttons of the individual slides*/
     const deleteBtnElement = document.querySelectorAll('.deleteBtn')
+    
+    /* adding eventListener to each delet button */
     for (const button of deleteBtnElement) {
         button.addEventListener('click', (e) =>{
+            
+            /* creating variable for body of DELETE request */
             const itemToDelete = {"filename": `${e.target.value}`}
             const itemToDeleteJSON = JSON.stringify(itemToDelete)
+            
+            /* makeing the fetch with DELETE request */
             fetch('/delete', {
                 method: 'DELETE',
                 headers: {
